@@ -1,0 +1,11 @@
+{
+  "name": "fantasy-draft-tool",
+  "version": "1.0.0",
+  "description": "Web app that tracks available players & aggregates fantasy team's stats",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Myles Gaerlan",
+  "license": "ISC"
+}
