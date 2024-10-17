@@ -2,10 +2,16 @@
   "name": "fantasy-draft-tool",
   "version": "1.0.0",
   "description": "Web app that tracks available players & aggregates fantasy team's stats",
-  "main": "index.js",
+  "private": true,
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "webpack"
   },
   "author": "Myles Gaerlan",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "html-webpack-plugin": "^5.6.0",
+    "webpack": "^5.95.0",
+    "webpack-cli": "^5.1.4"
+  }
 }
