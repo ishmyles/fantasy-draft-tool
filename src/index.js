@@ -1,5 +1,5 @@
 import "./assets/styles/styles.css";
-import data from "../data/espnStats.json";
+import data from "./data/espnStats.json";
 
 document.addEventListener("DOMContentLoaded", () => {
   const tableBody = document.querySelector("tbody");
