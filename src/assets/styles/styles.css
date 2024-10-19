@@ -1,0 +1,92 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+body {
+    width: 100%;
+    height: 100vh;
+}
+
+.topbar {
+    background-color: #cf4119;
+    width: 100%;
+    height: 50px;
+}
+
+main {
+    display: flex;
+    flex-direction: row;
+    height: calc(100% - 50px); 
+}
+
+#team-picks, #picks-history {
+    background-color: #edeef0;
+    flex: 1;
+}
+
+#available-players {
+    flex: 3;
+    overflow: scroll;
+    overflow-x: hidden;
+}
+
+.table-actions {
+    height: 50px;
+}
+
+table {
+    width: 100%;
+    text-align: center;
+    border-collapse: collapse; 
+}
+thead {
+    position: sticky;
+    top: 50px;
+    background-color: white;
+}
+
+.table-actions {
+    position: sticky;
+    top: 0;
+    background-color: white;
+}
+
+tbody tr {
+    border-bottom: 1px solid rgb(220, 221, 223);
+}
+
+th, td {
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+tr > td:first-of-type {
+    text-align: start;
+}
+
+tr:nth-of-type(2n) {
+    background-color: rgba(0, 0, 0, .02);
+}
+
+.txt-row {
+    display: block;
+}
+
+.txt-sm {
+    font-size: 0.8rem;
+}
+
+.txt-grey {
+    color: rgb(121, 123, 125);
+}
+
+.txt-dark-grey {
+    color: rgb(99, 100, 101);
+}
+
+.txt-bold {
+    font-weight: bold;
+}
