@@ -14,4 +14,20 @@ module.exports = {
       title: "NBA Fantasy Draft tool",
     }),
   ],
+  module: {
+    rules: [
+      {
+        test: /\.css$/,
+        use: [
+          { loader: "style-loader" },
+          {
+            loader: "css-loader",
+            options: {
+              modules: true,
+            },
+          },
+        ],
+      },
+    ],
+  },
 };
