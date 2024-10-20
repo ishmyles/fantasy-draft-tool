@@ -34,7 +34,6 @@ export default function () {
                                 <option value="C">C</option>
                                 <option value="G">G</option>
                                 <option value="F">F</option>
-                                <option value="C">C</option>
                             </select>
                         </label>
                       </div>
@@ -69,6 +68,11 @@ export default function () {
     const sortDropdown = document.querySelector("#stat-category");
     sortDropdown.addEventListener("change", (e) =>
       sortPlayersByStats(e.target.value)
+    );
+
+    const filterDropdown = document.querySelector("#position-category");
+    filterDropdown.addEventListener("change", (e) =>
+      filterByPosition(e.target.value)
     );
   };
 
@@ -157,6 +161,32 @@ export default function () {
         newtableBody.appendChild(tableRow);
       });
 
+    document.querySelector("tbody").remove();
+    table.appendChild(newtableBody);
+  };
+
+  const filterByPosition = (position) => {
+    const table = document.querySelector(".available-players-stats");
+    const newtableBody = document.createElement("tbody");
+    data
+      .filter((player) => {
+        const playerPositions = player.position.split(",");
+        if (position === "G") {
+          return (
+            playerPositions.includes("PG") || playerPositions.includes("SG")
+          );
+        } else if (position === "F") {
+          return (
+            playerPositions.includes("SF") || playerPositions.includes("PF")
+          );
+        } else {
+          return playerPositions.includes(position);
+        }
+      })
+      .forEach((player) => {
+        const tableRow = renderPlayerList(player);
+        newtableBody.appendChild(tableRow);
+      });
     document.querySelector("tbody").remove();
     table.appendChild(newtableBody);
   };
