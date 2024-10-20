@@ -13,3 +13,7 @@ pickHistorySection.initialise();
 
 availablePlayersSection.initialise();
 availablePlayersSection.renderPlayers();
+
+// setTimeout(() => {
+//   availablePlayersSection.sortPlayers();
+// }, 5000);
