@@ -24,6 +24,7 @@ main {
 
 #team-picks, #picks-history {
     background-color: #edeef0;
+    padding: 10px;
     flex: 1;
 }
 
@@ -37,12 +38,13 @@ main {
     height: 50px;
 }
 
-table {
+.available-players-stats {
     width: 100%;
     text-align: center;
     border-collapse: collapse; 
 }
-thead {
+
+.available-players-stats thead {
     position: sticky;
     top: 50px;
     background-color: white;
@@ -54,20 +56,20 @@ thead {
     background-color: white;
 }
 
-tbody tr {
+.available-players-statstbody tr {
     border-bottom: 1px solid rgb(220, 221, 223);
 }
 
-th, td {
+.available-players-stats th, .available-players-stats td {
     padding-top: 10px;
     padding-bottom: 10px;
 }
 
-tr > td:first-of-type {
+.available-players-stats tr > td:first-of-type {
     text-align: start;
 }
 
-tr:nth-of-type(2n) {
+.available-players-stats tr:nth-of-type(2n) {
     background-color: rgba(0, 0, 0, .02);
 }
 
@@ -77,6 +79,10 @@ tr:nth-of-type(2n) {
 
 .txt-sm {
     font-size: 0.8rem;
+}
+
+.txt-xs {
+    font-size: 0.7rem;
 }
 
 .txt-grey {
@@ -90,3 +96,19 @@ tr:nth-of-type(2n) {
 .txt-bold {
     font-weight: bold;
 }
+
+.player-card {
+    padding-top: 5px;
+    padding-bottom: 5px;
+    border-bottom: 1px solid rgb(220, 221, 223);
+}
+
+.player-card table {
+    width: 100%;
+    text-align: center;
+    color: rgb(99, 100, 101);
+}
+
+    /* background-color: white;
+    padding: 5px;
+    border-radius: 10px; */
