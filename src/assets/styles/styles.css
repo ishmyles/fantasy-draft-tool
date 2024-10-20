@@ -24,12 +24,16 @@ main {
 
 #team-picks, #picks-history {
     background-color: #edeef0;
-    padding: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
     flex: 1;
 }
 
 #available-players {
     flex: 3;
+}
+
+#team-picks, #available-players, #picks-history {
     overflow: scroll;
     overflow-x: hidden;
 }
@@ -97,7 +101,15 @@ main {
     font-weight: bold;
 }
 
-.player-card {
+h2 {
+    background-color: inherit;
+    position: sticky;
+    top: 0;
+    padding-top: 10px;
+    margin-bottom: 20px;
+}
+
+.player-card, .pick-history-card  {
     padding-top: 5px;
     padding-bottom: 5px;
     border-bottom: 1px solid rgb(220, 221, 223);
@@ -109,6 +121,10 @@ main {
     color: rgb(99, 100, 101);
 }
 
-    /* background-color: white;
-    padding: 5px;
-    border-radius: 10px; */
+/* .pick-history-card {    
+
+    padding-top: 5px;
+    padding-bottom: 5px;
+    border-bottom: 1px solid rgb(220, 221, 223);
+    border-radius: 10px;
+} */
