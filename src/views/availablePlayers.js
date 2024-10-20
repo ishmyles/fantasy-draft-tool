@@ -38,8 +38,7 @@ export default function () {
                         </label>
                       </div>
                       <div class="search-bar">
-                          <input type="text" id="search">
-                          <button type="button">Search</button>
+                          <input type="text" id="search" placeholder="Search Player">
                       </div>
                   </div>
                   <table class="available-players-stats">
