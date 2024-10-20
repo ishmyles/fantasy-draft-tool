@@ -1,17 +1,15 @@
 import "./assets/styles/styles.css";
-//import data from "./data/espnStats.json";
 
-import {
-  renderPlayersSection,
-  renderPlayers,
-} from "./views/availablePlayers.js";
-import { addToRoster, renderRosterSection } from "./views/roster.js";
-import { renderPickHistorySection } from "./views/pickHistory.js";
+import { default as availablePlayers } from "./views/availablePlayers.js";
+import { default as teamRoster } from "./views/roster.js";
+import { default as pickHistory } from "./views/pickHistory.js";
 
-renderRosterSection();
-renderPickHistorySection();
-renderPlayersSection();
+const teamRosterSection = teamRoster();
+const pickHistorySection = pickHistory();
+const availablePlayersSection = availablePlayers();
 
-renderPlayers();
+teamRosterSection.initialise();
+pickHistorySection.initialise();
 
-addToRoster(2);
+availablePlayersSection.initialise();
+availablePlayersSection.renderPlayers();

@@ -1,21 +1,30 @@
-// document.addEventListener("DOMContentLoaded", () => {
-//   const picksList = document.querySelector(".picks-list");
+import data from "../data/espnStats.json";
+import pubsub from "../utils/pubsub";
 
-//   for (let i = 0; i < 40; i++) {
-//     const pickCard = document.createElement("div");
-//     pickCard.classList.add("pick-history-card");
-//     pickCard.classList.add("txt-dark-grey");
-//     pickCard.classList.add("txt-sm");
-//     pickCard.innerHTML = `<strong>Pick #${i + 1}:</strong> ${data[i].name}`;
-//     picksList.appendChild(pickCard);
-//   }
-// });
+export default function () {
+  const initialise = () => {
+    const picksHistorySection = document.querySelector("#picks-history");
+    picksHistorySection.innerHTML = `<h2>Pick History</h2>
+          <div class="picks-list">
+          </div>`;
+    pubsub.subscribe("MARK_PLAYER_UNAVAILABLE", addToPickHistory);
+  };
 
-const renderPickHistorySection = () => {
-  const picksHistorySection = document.querySelector("#picks-history");
-  picksHistorySection.innerHTML = `<h2>Pick History</h2>
-    <div class="picks-list">
-    </div>`;
-};
+  const addToPickHistory = (id) => {
+    const picksList = document.querySelector(".picks-list");
+    const picks = document.querySelectorAll(".pick-history-card");
 
-export { renderPickHistorySection };
+    const index = id - 1;
+
+    const pickCard = document.createElement("div");
+    pickCard.classList.add("pick-history-card");
+    pickCard.classList.add("txt-dark-grey");
+    pickCard.classList.add("txt-sm");
+    pickCard.innerHTML = `<strong>Pick #${picks.length + 1}:</strong> ${
+      data[index].name
+    }`;
+    picksList.appendChild(pickCard);
+  };
+
+  return { initialise };
+}
