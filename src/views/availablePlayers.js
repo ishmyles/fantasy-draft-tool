@@ -39,6 +39,7 @@ export default function () {
                       </div>
                       <div class="search-bar">
                           <input type="text" id="search" placeholder="Search Player">
+                          <button id="clear">Clear</button>
                       </div>
                   </div>
                   <table class="available-players-stats">
@@ -76,6 +77,12 @@ export default function () {
 
     const searchbar = document.querySelector("#search");
     searchbar.addEventListener("input", (e) => searchPlayer(e.target.value));
+
+    const clearBtn = document.querySelector("#clear");
+    clearBtn.addEventListener("click", () => {
+      document.querySelector("#search").value = "";
+      searchPlayer("");
+    });
   };
 
   const renderPlayers = () => {
@@ -87,25 +94,27 @@ export default function () {
       availablePlayers.appendChild(newRow);
     });
 
-    tableBody.addEventListener("click", (e) => {
-      const tableRow = e.target.parentElement.parentElement.parentElement;
-      const id = tableRow.dataset.id;
-
-      if (e.target.classList.contains("btn-draft")) {
-        tableRow.remove();
-        pubsub.publish("DRAFT_PLAYER", id);
-        pubsub.publish("MARK_PLAYER_UNAVAILABLE", id);
-      } else if (e.target.nodeName === "svg") {
-        tableRow.remove();
-        pubsub.publish("MARK_PLAYER_UNAVAILABLE", id);
-      } else if (e.target.nodeName === "path") {
-        const tableRow =
-          e.target.parentElement.parentElement.parentElement.parentElement;
+    document
+      .querySelector("#available-players table")
+      .addEventListener("click", (e) => {
+        const tableRow = e.target.parentElement.parentElement.parentElement;
         const id = tableRow.dataset.id;
-        tableRow.remove();
-        pubsub.publish("MARK_PLAYER_UNAVAILABLE", id);
-      }
-    });
+
+        if (e.target.classList.contains("btn-draft")) {
+          tableRow.remove();
+          pubsub.publish("DRAFT_PLAYER", id);
+          pubsub.publish("MARK_PLAYER_UNAVAILABLE", id);
+        } else if (e.target.nodeName === "svg") {
+          tableRow.remove();
+          pubsub.publish("MARK_PLAYER_UNAVAILABLE", id);
+        } else if (e.target.nodeName === "path") {
+          const tableRow =
+            e.target.parentElement.parentElement.parentElement.parentElement;
+          const id = tableRow.dataset.id;
+          tableRow.remove();
+          pubsub.publish("MARK_PLAYER_UNAVAILABLE", id);
+        }
+      });
 
     tableBody.appendChild(availablePlayers);
   };
@@ -163,7 +172,7 @@ export default function () {
         newtableBody.appendChild(tableRow);
       });
 
-    document.querySelector("tbody").remove();
+    document.querySelector(".available-players-stats tbody").remove();
     table.appendChild(newtableBody);
   };
 
@@ -189,13 +198,15 @@ export default function () {
         const tableRow = renderPlayerList(player);
         newtableBody.appendChild(tableRow);
       });
-    document.querySelector("tbody").remove();
+
+    document.querySelector(".available-players-stats tbody").remove();
     table.appendChild(newtableBody);
   };
 
   const searchPlayer = (input) => {
     const table = document.querySelector(".available-players-stats");
     const newtableBody = document.createElement("tbody");
+
     data
       .filter((player) =>
         player.name.toLowerCase().includes(input.toLowerCase())
@@ -204,7 +215,8 @@ export default function () {
         const tableRow = renderPlayerList(player);
         newtableBody.appendChild(tableRow);
       });
-    document.querySelector("tbody").remove();
+
+    document.querySelector(".available-players-stats tbody").remove();
     table.appendChild(newtableBody);
   };
 
