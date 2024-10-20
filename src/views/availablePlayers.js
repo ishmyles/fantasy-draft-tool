@@ -74,6 +74,9 @@ export default function () {
     filterDropdown.addEventListener("change", (e) =>
       filterByPosition(e.target.value)
     );
+
+    const searchbar = document.querySelector("#search");
+    searchbar.addEventListener("input", (e) => searchPlayer(e.target.value));
   };
 
   const renderPlayers = () => {
@@ -183,6 +186,21 @@ export default function () {
           return playerPositions.includes(position);
         }
       })
+      .forEach((player) => {
+        const tableRow = renderPlayerList(player);
+        newtableBody.appendChild(tableRow);
+      });
+    document.querySelector("tbody").remove();
+    table.appendChild(newtableBody);
+  };
+
+  const searchPlayer = (input) => {
+    const table = document.querySelector(".available-players-stats");
+    const newtableBody = document.createElement("tbody");
+    data
+      .filter((player) =>
+        player.name.toLowerCase().includes(input.toLowerCase())
+      )
       .forEach((player) => {
         const tableRow = renderPlayerList(player);
         newtableBody.appendChild(tableRow);
