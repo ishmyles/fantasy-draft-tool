@@ -27,6 +27,7 @@ export default function () {
                       <div>
                         <label for="position-category">Filter by:
                             <select id="position-category">
+                                <option value="ALL">All</option>
                                 <option value="PG">PG</option>
                                 <option value="SG">SG</option>
                                 <option value="SF">SF</option>
@@ -212,7 +213,8 @@ export default function () {
     data
       .filter((player) => !picks.has(player.id))
       .filter((player) => {
-        const playerPositions = player.position.split(",");
+        const playerPositions = player.position.split(", ");
+        if (position === "ALL") return true;
         if (position === "G") {
           return (
             playerPositions.includes("PG") || playerPositions.includes("SG")
