@@ -75,7 +75,23 @@ export default function () {
 
   const renderRoster = () => {
     const teamList = document.querySelector(".team-list");
-    teamList.innerHTML = "";
+    teamList.innerHTML = `<table class="txt-xs">
+                        <thead>
+                            <tr>
+                                <th scope="col">GP</th>
+                                <th scope="col">FG%</th>
+                                <th scope="col">FT%</th>
+                                <th scope="col">3PM</th>
+                                <th scope="col">REB</th>
+                                <th scope="col">AST</th>
+                                <th scope="col">A/TO</th>
+                                <th scope="col">STL</th>
+                                <th scope="col">BLK</th>
+                                <th scope="col">TO</th>
+                                <th scope="col">PTS</th>
+                            </tr>
+                        </thead>
+                    </table>`;
     const list = new Set(JSON.parse(localStorage.getItem("fba-roster")));
     list.forEach((id) => addToRoster(id));
     calculateStatAggregate();
