@@ -14,6 +14,43 @@ body {
     height: 100vh;
 }
 
+/* Typography */
+
+h2, h3 {
+    color: #0D183E;
+}
+
+h2 {
+    padding-top: 10px;
+    margin-bottom: 20px;
+}
+
+.txt-row {
+    display: block;
+}
+
+.txt-sm {
+    font-size: 0.8rem;
+}
+
+.txt-xs {
+    font-size: 0.7rem;
+}
+
+.txt-grey {
+    color: rgb(121, 123, 125);
+}
+
+.txt-dark-grey {
+    color: rgb(99, 100, 101);
+}
+
+.txt-bold {
+    font-weight: bold;
+}
+
+/* Topbar */
+
 .topbar {
     display: flex;
     flex-direction: row;
@@ -24,19 +61,29 @@ body {
     height: 50px;
 }
 
+#logo {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    font-size: 0.8rem;
+    color: white;
+}
 
 .btn-reset {
+    color: #0D183E;
     font-weight: bold;
     padding: 5px;
     margin-right: 10px;
-    border: 2px solid black;
+    border: 2px solid #0D183E;
     border-radius: 5px;
 }
 
 .btn-reset:hover {
-    background-color: black;
+    background-color: #0D183E;
     color: #cf4119;
 }
+
+/* Shared rules */
 
 main {
     display: flex;
@@ -60,10 +107,45 @@ main {
     overflow-x: hidden;
 }
 
+.player-card, .pick-history-card  {
+    padding-top: 5px;
+    padding-bottom: 5px;
+    border-bottom: 1px solid rgb(220, 221, 223);
+}
+
+.team-list table, .player-card table, .team-totals table {
+    width: 100%;
+    text-align: center;
+}
+
+.btn-reset:active, button:active, .btn-draft:active, .btn-picked:active, .btn-undo:active {
+    opacity: 0.7;
+}
+
+/* Roster Section */
+
 .team-list {
     min-height: 75%;
     margin-bottom: 20px;
 }
+
+.player-card table {
+    color: rgb(99, 100, 101);
+}
+
+.team-totals {
+    margin-bottom: 10px;
+}
+
+.position-count {
+    padding-left: 5px;
+}
+
+.position-count p{
+    display: inline;
+}
+
+/* Available Players Section */
 
 .table-actions {
     display: flex;
@@ -75,6 +157,9 @@ main {
 }
 
 .table-actions h2 {
+    background-color: inherit;
+    position: sticky;
+    top: 0;
     margin-right: auto;
     padding-left: 15px;
 }
@@ -99,6 +184,24 @@ main {
     position: sticky;
     top: 0;
     background-color: white;
+}
+
+input, select, button {
+    padding: 3px 7px;
+    border-radius: 20px;
+    border: 2px solid #0D183E;
+}
+
+button {
+    background-color: #0D183E;
+    color: white;
+    font-weight: bold;
+    border: 2px solid #0D183E;
+}
+
+button:hover {
+    background-color: white;
+    color: #0D183E;
 }
 
 .available-players-statstbody tr {
@@ -147,67 +250,19 @@ main {
 }
 
 .btn-picked {
+    display: none;
     fill: rgb(99, 100, 101);
 }
 
-.txt-row {
+.available-players-stats tr:hover .btn-picked {
     display: block;
 }
 
-.txt-sm {
-    font-size: 0.8rem;
+.btn-picked:hover {
+    fill: rgb(125, 125, 126);
 }
 
-.txt-xs {
-    font-size: 0.7rem;
-}
-
-.txt-grey {
-    color: rgb(121, 123, 125);
-}
-
-.txt-dark-grey {
-    color: rgb(99, 100, 101);
-}
-
-.txt-bold {
-    font-weight: bold;
-}
-
-h2 {
-    background-color: inherit;
-    position: sticky;
-    top: 0;
-    padding-top: 10px;
-    margin-bottom: 20px;
-}
-
-.player-card, .pick-history-card  {
-    padding-top: 5px;
-    padding-bottom: 5px;
-    border-bottom: 1px solid rgb(220, 221, 223);
-}
-
-.team-list table, .player-card table, .team-totals table {
-    width: 100%;
-    text-align: center;
-}
-
-.player-card table {
-    color: rgb(99, 100, 101);
-}
-
-.team-totals {
-    margin-bottom: 10px;
-}
-
-.position-count {
-    padding-left: 5px;
-}
-
-.position-count p{
-    display: inline;
-}
+/* Pick History Section */
 
 h2:last-of-type {
     display: flex;
@@ -217,17 +272,13 @@ h2:last-of-type {
 }
 
 .btn-undo {
-    border: 2px solid black;
+    border: 2px solid #0D183E;
     border-radius: 5px;
 }
 
 .btn-undo:hover {
     fill: #edeef0;
-    background-color: black;
-    border: 2px solid black;
+    background-color: #0D183E;
+    border: 2px solid #0D183E;
     border-radius: 5px;
-}
-
-.btn-undo:active {
-    opacity: 0.7;
 }
