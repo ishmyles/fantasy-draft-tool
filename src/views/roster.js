@@ -59,6 +59,13 @@ export default function () {
                             </tr>
                         </tobdy>
                     </table>
+                </div>
+                <div class="position-count">
+                    <p class="txt-sm"><strong>PG: </strong><span data-position="PG"><span></p>
+                    <p class="txt-sm"><strong> &nbsp; SG: </strong><span data-position="SG"><span></p>
+                    <p class="txt-sm"><strong> &nbsp; SF: </strong><span data-position="SF"><span></p>
+                    <p class="txt-sm"><strong> &nbsp; PF: </strong><span data-position="PF"><span></p>
+                    <p class="txt-sm"><strong> &nbsp; C: </strong><span data-position="C"><span></p>
                 </div>`;
 
     pubsub.subscribe("DRAFT_PLAYER", addToRoster);
@@ -68,6 +75,7 @@ export default function () {
     const list = new Set(JSON.parse(localStorage.getItem("fba-roster")));
     list.forEach((id) => addToRoster(id));
     calculateStatAggregate();
+    countTeamPositions();
   };
 
   const addToRoster = (id) => {
@@ -100,6 +108,7 @@ export default function () {
 
     teamList.appendChild(newCard);
     calculateStatAggregate();
+    countTeamPositions();
   };
 
   const calculateStatAggregate = () => {
@@ -172,6 +181,33 @@ export default function () {
     for (let i = 0; i < teamTotals.length; i++) {
       teamTotals[i].textContent = aggrAvgStats[teamTotals[i].dataset.stat];
     }
+  };
+
+  const countTeamPositions = () => {
+    const positionCategories = document.querySelectorAll("[data-position]");
+    const list = new Set(JSON.parse(localStorage.getItem("fba-roster")));
+    let playerPositions = [];
+
+    list.forEach((id) => {
+      const index = id - 1;
+      playerPositions.push(...data[index].position.split(", "));
+    });
+
+    positionCategories.forEach((span) => {
+      const positionCount = countPlayerPosition(
+        span.dataset.position,
+        playerPositions
+      );
+      span.textContent = positionCount;
+    });
+  };
+
+  const countPlayerPosition = (currentPosition, positionsList) => {
+    let count = 0;
+    positionsList.forEach((position) => {
+      if (currentPosition === position) count++;
+    });
+    return count;
   };
 
   return { initialise, renderRoster };
