@@ -1,4 +1,5 @@
 import "./assets/styles/styles.css";
+import pubsub from "./utils/pubsub.js";
 
 import { default as availablePlayers } from "./views/availablePlayers.js";
 import { default as teamRoster } from "./views/roster.js";
@@ -31,3 +32,7 @@ teamRosterSection.renderRoster();
 pickHistorySection.renderPickHistory();
 
 availablePlayersSection.renderPlayers();
+
+document.querySelector(".btn-reset").addEventListener("click", () => {
+  pubsub.publish("RESET");
+});

@@ -13,6 +13,7 @@ export default function () {
     }
     pubsub.subscribe("MARK_PLAYER_UNAVAILABLE", addPlayer);
     pubsub.subscribe("UNDO_PICK", removePlayer);
+    pubsub.subscribe("RESET", resetPicks);
   };
 
   const addPlayer = (id) => {
@@ -23,6 +24,11 @@ export default function () {
   const removePlayer = (id) => {
     _picks.delete(+id);
     localStorage.setItem("fba-picks", JSON.stringify([..._picks]));
+  };
+
+  const resetPicks = () => {
+    localStorage.setItem("fba-picks", JSON.stringify([]));
+    _picks = new Set();
   };
 
   return { initialise };

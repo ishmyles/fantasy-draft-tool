@@ -22,9 +22,13 @@ export default function () {
       }
     });
     pubsub.subscribe("MARK_PLAYER_UNAVAILABLE", addToPickHistory);
+    pubsub.subscribe("RESET", renderPickHistory);
   };
 
   const renderPickHistory = () => {
+    const picksList = document.querySelector(".picks-list");
+    picksList.innerHTML = "";
+
     const list = new Set(JSON.parse(localStorage.getItem("fba-picks")));
     list.forEach((id) => addToPickHistory(id));
   };

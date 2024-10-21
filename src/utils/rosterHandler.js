@@ -13,6 +13,7 @@ export default function () {
     }
     pubsub.subscribe("DRAFT_PLAYER", addPlayer);
     pubsub.subscribe("UNDO_DRAFT_PICK", removePlayer);
+    pubsub.subscribe("RESET", resetRoster);
   };
 
   const addPlayer = (id) => {
@@ -23,6 +24,11 @@ export default function () {
   const removePlayer = (id) => {
     _team.delete(+id);
     localStorage.setItem("fba-roster", JSON.stringify([..._team]));
+  };
+
+  const resetRoster = () => {
+    localStorage.setItem("fba-roster", JSON.stringify([]));
+    _team = new Set();
   };
 
   return { initialise };

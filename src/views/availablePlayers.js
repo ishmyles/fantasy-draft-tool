@@ -107,6 +107,7 @@ export default function () {
     });
 
     pubsub.subscribe("UNDO_PICK", renderPlayers);
+    pubsub.subscribe("RESET", renderPlayers);
   };
 
   const renderPlayers = () => {

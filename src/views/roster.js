@@ -70,6 +70,7 @@ export default function () {
 
     pubsub.subscribe("DRAFT_PLAYER", addToRoster);
     pubsub.subscribe("UNDO_DRAFT_PICK", renderRoster);
+    pubsub.subscribe("RESET", renderRoster);
   };
 
   const renderRoster = () => {
@@ -116,6 +117,39 @@ export default function () {
 
   const calculateStatAggregate = () => {
     const roster = [];
+    document.querySelector(".team-totals").innerHTML = `<table class="txt-xs">
+                        <thead>
+                            <tr>
+                                <th scope="col">GP</th>
+                                <th scope="col">FG%</th>
+                                <th scope="col">FT%</th>
+                                <th scope="col">3PM</th>
+                                <th scope="col">REB</th>
+                                <th scope="col">AST</th>
+                                <th scope="col">A/TO</th>
+                                <th scope="col">STL</th>
+                                <th scope="col">BLK</th>
+                                <th scope="col">TO</th>
+                                <th scope="col">PTS</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td data-stat="gp"></td>
+                                <td data-stat="fg"></td>
+                                <td data-stat="ft"></td>
+                                <td data-stat="3pm"></td>
+                                <td data-stat="reb"></td>
+                                <td data-stat="ast"></td>
+                                <td data-stat="assistTO"></td>
+                                <td data-stat="stl"></td>
+                                <td data-stat="blk"></td>
+                                <td data-stat="to"></td>
+                                <td data-stat="pts"></td>
+                            </tr>
+                        </tobdy>
+                    </table>`;
+
     const list = new Set(JSON.parse(localStorage.getItem("fba-roster")));
     if (list.size === 0) return;
 
