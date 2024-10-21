@@ -19,7 +19,7 @@ const pickHistorySection = pickHistory();
    When DOM components publish an event, the local storage handlers are first to save the data before other
    DOM components access the local storage data to perform its logic.
 */
-//localStorage.clear();
+localStorage.clear();
 roster.initialise();
 picks.initialise();
 

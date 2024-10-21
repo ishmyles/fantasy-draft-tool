@@ -12,6 +12,7 @@ export default function () {
       _picks = new Set(rosterList);
     }
     pubsub.subscribe("MARK_PLAYER_UNAVAILABLE", addPlayer);
+    pubsub.subscribe("UNDO_PICK", removePlayer);
   };
 
   const addPlayer = (id) => {

@@ -65,38 +65,6 @@ export default function () {
                       </tbody>
                   </table>`;
 
-    const sortDropdown = document.querySelector("#stat-category");
-    sortDropdown.addEventListener("change", (e) =>
-      sortPlayersByStats(e.target.value)
-    );
-
-    const filterDropdown = document.querySelector("#position-category");
-    filterDropdown.addEventListener("change", (e) =>
-      filterByPosition(e.target.value)
-    );
-
-    const searchbar = document.querySelector("#search");
-    searchbar.addEventListener("input", (e) => searchPlayer(e.target.value));
-
-    const clearBtn = document.querySelector("#clear");
-    clearBtn.addEventListener("click", () => {
-      document.querySelector("#search").value = "";
-      searchPlayer("");
-    });
-  };
-
-  const renderPlayers = () => {
-    const list = new Set(JSON.parse(localStorage.getItem("fba-picks")));
-    const tableBody = document.querySelector("#available-players tbody");
-    const availablePlayers = new DocumentFragment();
-
-    data
-      .filter((player) => !list.has(player.id))
-      .forEach((player) => {
-        const newRow = renderPlayerList(player);
-        availablePlayers.appendChild(newRow);
-      });
-
     document
       .querySelector("#available-players table")
       .addEventListener("click", (e) => {
@@ -119,7 +87,45 @@ export default function () {
         }
       });
 
-    tableBody.appendChild(availablePlayers);
+    const sortDropdown = document.querySelector("#stat-category");
+    sortDropdown.addEventListener("change", (e) =>
+      sortPlayersByStats(e.target.value)
+    );
+
+    const filterDropdown = document.querySelector("#position-category");
+    filterDropdown.addEventListener("change", (e) =>
+      filterByPosition(e.target.value)
+    );
+
+    const searchbar = document.querySelector("#search");
+    searchbar.addEventListener("input", (e) => searchPlayer(e.target.value));
+
+    const clearBtn = document.querySelector("#clear");
+    clearBtn.addEventListener("click", () => {
+      document.querySelector("#search").value = "";
+      searchPlayer("");
+    });
+
+    pubsub.subscribe("UNDO_PICK", renderPlayers);
+  };
+
+  const renderPlayers = () => {
+    const list = new Set(JSON.parse(localStorage.getItem("fba-picks")));
+    const table = document.querySelector("#available-players table");
+    const tableBody = document.querySelector("#available-players tbody");
+    const newtableBody = document.createElement("tbody");
+    const availablePlayers = new DocumentFragment();
+
+    data
+      .filter((player) => !list.has(player.id))
+      .forEach((player) => {
+        const newRow = renderPlayerList(player);
+        availablePlayers.appendChild(newRow);
+      });
+
+    newtableBody.appendChild(availablePlayers);
+    tableBody.remove();
+    table.appendChild(newtableBody);
   };
 
   const renderPlayerList = (player) => {

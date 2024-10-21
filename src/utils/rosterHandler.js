@@ -12,6 +12,7 @@ export default function () {
       _team = new Set(rosterList);
     }
     pubsub.subscribe("DRAFT_PLAYER", addPlayer);
+    pubsub.subscribe("UNDO_DRAFT_PICK", removePlayer);
   };
 
   const addPlayer = (id) => {

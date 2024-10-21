@@ -69,9 +69,12 @@ export default function () {
                 </div>`;
 
     pubsub.subscribe("DRAFT_PLAYER", addToRoster);
+    pubsub.subscribe("UNDO_DRAFT_PICK", renderRoster);
   };
 
   const renderRoster = () => {
+    const teamList = document.querySelector(".team-list");
+    teamList.innerHTML = "";
     const list = new Set(JSON.parse(localStorage.getItem("fba-roster")));
     list.forEach((id) => addToRoster(id));
     calculateStatAggregate();
