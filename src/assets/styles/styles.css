@@ -102,7 +102,7 @@ main {
     flex: 3;
 }
 
-#team-roster, #available-players, #picks-history {
+.team-list, #available-players, #picks-history {
     overflow: scroll;
     overflow-x: hidden;
 }
@@ -118,6 +118,13 @@ main {
     text-align: center;
 }
 
+#team-roster h2, .team-list > table, #picks-history > .subheading-container {
+    background-color: inherit;
+    position: sticky;
+    top: 0;
+    padding-bottom: 5px;
+} 
+
 .btn-reset:active, button:active, .btn-draft:active, .btn-picked:active, .btn-undo:active {
     opacity: 0.7;
 }
@@ -125,7 +132,8 @@ main {
 /* Roster Section */
 
 .team-list {
-    min-height: 75%;
+    background-color: inherit;
+    height: 70%;
     margin-bottom: 20px;
 }
 
