@@ -7,21 +7,25 @@ import { default as pickHistory } from "./views/pickHistory.js";
 import rosterHandler from "./utils/rosterHandler.js";
 import pickHistoryHandler from "./utils/pickHistoryHandler.js";
 
+const roster = rosterHandler();
+const picks = pickHistoryHandler();
+
 const teamRosterSection = teamRoster();
 const availablePlayersSection = availablePlayers();
 const pickHistorySection = pickHistory();
 
-const roster = rosterHandler();
-const picks = pickHistoryHandler();
+/* 
+   Ordering is IMPORTANT! We want local storage handlers to initialise first to subscribe before DOM components.
+   When DOM components publish an event, the local storage handlers are first to save the data before other
+   DOM components access the local storage data to perform its logic.
+*/
+//localStorage.clear();
+roster.initialise();
+picks.initialise();
 
 teamRosterSection.initialise();
 availablePlayersSection.initialise();
 pickHistorySection.initialise();
-
-//localStorage.clear();
-
-roster.initialise();
-picks.initialise();
 
 teamRosterSection.renderRoster();
 pickHistorySection.renderPickHistory();

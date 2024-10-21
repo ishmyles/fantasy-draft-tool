@@ -45,17 +45,17 @@ export default function () {
                         </thead>
                         <tbody>
                             <tr>
-                                <td>70</td>
-                                <td>.491</td>
-                                <td>.820</td>
-                                <td>2.1</td>
-                                <td>12.0</td>
-                                <td>4.4</td>
-                                <td>1.07</td>
-                                <td>1.8</td>
-                                <td>4.3</td>
-                                <td>4.1</td>
-                                <td>25.4</td>
+                                <td data-stat="gp"></td>
+                                <td data-stat="fg"></td>
+                                <td data-stat="ft"></td>
+                                <td data-stat="3pm"></td>
+                                <td data-stat="reb"></td>
+                                <td data-stat="ast"></td>
+                                <td data-stat="assistTO"></td>
+                                <td data-stat="stl"></td>
+                                <td data-stat="blk"></td>
+                                <td data-stat="to"></td>
+                                <td data-stat="pts"></td>
                             </tr>
                         </tobdy>
                     </table>
@@ -67,6 +67,7 @@ export default function () {
   const renderRoster = () => {
     const list = new Set(JSON.parse(localStorage.getItem("fba-roster")));
     list.forEach((id) => addToRoster(id));
+    calculateStatAggregate();
   };
 
   const addToRoster = (id) => {
@@ -98,10 +99,79 @@ export default function () {
         </table>`;
 
     teamList.appendChild(newCard);
+    calculateStatAggregate();
   };
 
   const calculateStatAggregate = () => {
-    // TODO
+    const roster = [];
+    const list = new Set(JSON.parse(localStorage.getItem("fba-roster")));
+    if (list.size === 0) return;
+
+    const teamTotals = Array.from(
+      document.querySelectorAll(".team-totals tbody td")
+    );
+
+    list.forEach((id) => {
+      const index = id - 1;
+      roster.push({
+        gp: data[index].statsPrediction.gp,
+        fg: data[index].statsPrediction.fg,
+        ft: data[index].statsPrediction.ft,
+        "3pm": data[index].statsPrediction["3pm"],
+        reb: data[index].statsPrediction.reb,
+        ast: data[index].statsPrediction.ast,
+        to: data[index].statsPrediction.to,
+        assistTO: data[index].statsPrediction.assistTO,
+        stl: data[index].statsPrediction.stl,
+        blk: data[index].statsPrediction.blk,
+        pts: data[index].statsPrediction.pts,
+      });
+    });
+
+    const initialAggr = {
+      gp: 0,
+      fg: 0,
+      ft: 0,
+      "3pm": 0,
+      reb: 0,
+      ast: 0,
+      to: 0,
+      assistTO: 0,
+      stl: 0,
+      blk: 0,
+      pts: 0,
+    };
+
+    const aggrAvgStats = roster.reduce((aggr, current) => {
+      aggr.gp += +current.gp;
+      aggr.fg += +current.fg;
+      aggr.ft += +current.ft;
+      aggr["3pm"] += +current["3pm"];
+      aggr.reb += +current.reb;
+      aggr.ast += +current.ast;
+      aggr.to += +current.to;
+      aggr.assistTO += +current.assistTO;
+      aggr.stl += +current.stl;
+      aggr.blk += +current.blk;
+      aggr.pts += +current.pts;
+      return aggr;
+    }, initialAggr);
+
+    for (const [key, value] of Object.entries(aggrAvgStats)) {
+      if (key === "gp") {
+        aggrAvgStats[key] = Math.round(value / roster.length);
+      } else if (key === "fg" || key === "ft") {
+        aggrAvgStats[key] = (value / roster.length).toFixed(3);
+      } else if (key === "assistTO") {
+        aggrAvgStats[key] = (value / roster.length).toFixed(2);
+      } else {
+        aggrAvgStats[key] = (value / roster.length).toFixed(1);
+      }
+    }
+
+    for (let i = 0; i < teamTotals.length; i++) {
+      teamTotals[i].textContent = aggrAvgStats[teamTotals[i].dataset.stat];
+    }
   };
 
   return { initialise, renderRoster };
