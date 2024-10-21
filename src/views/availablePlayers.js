@@ -12,7 +12,7 @@ export default function () {
                             <option value="id">Rank</option>
                             <option value="gp">GP</option>
                             <option value="fg">FG%</option>
-                            <option value="tf">TF%</option>
+                            <option value="ft">FT%</option>
                             <option value="3pm">3PM</option>
                             <option value="reb">REB</option>
                             <option value="ast">AST</option>
