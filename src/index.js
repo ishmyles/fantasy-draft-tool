@@ -5,9 +5,11 @@ import { default as availablePlayers } from "./views/availablePlayers.js";
 import { default as teamRoster } from "./views/roster.js";
 import { default as pickHistory } from "./views/pickHistory.js";
 
+import wishlistHandler from "./utils/wishlistHandler.js";
 import rosterHandler from "./utils/rosterHandler.js";
 import pickHistoryHandler from "./utils/pickHistoryHandler.js";
 
+const wishlist = wishlistHandler();
 const roster = rosterHandler();
 const picks = pickHistoryHandler();
 
@@ -22,6 +24,7 @@ const pickHistorySection = pickHistory();
    DOM components access the local storage data to perform its logic.
 */
 //localStorage.clear();
+wishlist.initialise();
 roster.initialise();
 picks.initialise();
 

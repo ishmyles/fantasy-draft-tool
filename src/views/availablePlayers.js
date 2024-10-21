@@ -87,6 +87,18 @@ export default function () {
         }
       });
 
+    document
+      .querySelector("#available-players table")
+      .addEventListener("dblclick", (e) => {
+        const id = e.target.dataset.id;
+        if (e.target.classList.contains("wishlist")) {
+          pubsub.publish("REMOVE_WISHLIST", id);
+        } else {
+          pubsub.publish("ADD_WISHLIST", id);
+        }
+        e.target.classList.toggle("wishlist");
+      });
+
     const sortDropdown = document.querySelector("#stat-category");
     sortDropdown.addEventListener("change", (e) =>
       sortPlayersByStats(e.target.value)
@@ -112,6 +124,7 @@ export default function () {
 
   const renderPlayers = () => {
     const list = new Set(JSON.parse(localStorage.getItem("fba-picks")));
+    const wishlist = new Set(JSON.parse(localStorage.getItem("fba-wishlist")));
     const table = document.querySelector("#available-players table");
     const tableBody = document.querySelector("#available-players tbody");
     const newtableBody = document.createElement("tbody");
@@ -120,7 +133,7 @@ export default function () {
     data
       .filter((player) => !list.has(player.id))
       .forEach((player) => {
-        const newRow = renderPlayerList(player);
+        const newRow = renderPlayerList(player, wishlist);
         availablePlayers.appendChild(newRow);
       });
 
@@ -129,8 +142,9 @@ export default function () {
     table.appendChild(newtableBody);
   };
 
-  const renderPlayerList = (player) => {
+  const renderPlayerList = (player, wishlist) => {
     const newRow = document.createElement("tr");
+    if (wishlist.has(player.id)) newRow.classList.add("wishlist");
     newRow.setAttribute("data-id", player.id);
 
     newRow.innerHTML = `<th scope="row">${player.id}</th>
@@ -164,6 +178,7 @@ export default function () {
     const table = document.querySelector(".available-players-stats");
     const newtableBody = document.createElement("tbody");
     const picks = new Set(JSON.parse(localStorage.getItem("fba-picks")));
+    const wishlist = new Set(JSON.parse(localStorage.getItem("fba-wishlist")));
 
     // Any stat that is not a TO will be descending order & only TO will be in ascending order
     const sortingFunction =
@@ -180,7 +195,7 @@ export default function () {
       .filter((player) => player.statsPrediction.gp)
       .sort(sortingFunction)
       .forEach((player) => {
-        const tableRow = renderPlayerList(player);
+        const tableRow = renderPlayerList(player, wishlist);
         newtableBody.appendChild(tableRow);
       });
 
@@ -192,6 +207,7 @@ export default function () {
     const table = document.querySelector(".available-players-stats");
     const newtableBody = document.createElement("tbody");
     const picks = new Set(JSON.parse(localStorage.getItem("fba-picks")));
+    const wishlist = new Set(JSON.parse(localStorage.getItem("fba-wishlist")));
 
     data
       .filter((player) => !picks.has(player.id))
@@ -210,7 +226,7 @@ export default function () {
         }
       })
       .forEach((player) => {
-        const tableRow = renderPlayerList(player);
+        const tableRow = renderPlayerList(player, wishlist);
         newtableBody.appendChild(tableRow);
       });
 
@@ -222,6 +238,7 @@ export default function () {
     const table = document.querySelector(".available-players-stats");
     const newtableBody = document.createElement("tbody");
     const picks = new Set(JSON.parse(localStorage.getItem("fba-picks")));
+    const wishlist = new Set(JSON.parse(localStorage.getItem("fba-wishlist")));
 
     data
       .filter((player) => !picks.has(player.id))
@@ -229,7 +246,7 @@ export default function () {
         player.name.toLowerCase().includes(input.toLowerCase())
       )
       .forEach((player) => {
-        const tableRow = renderPlayerList(player);
+        const tableRow = renderPlayerList(player, wishlist);
         newtableBody.appendChild(tableRow);
       });
 

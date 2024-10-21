@@ -237,6 +237,10 @@ button:hover {
     gap: 20px
 }
 
+.wishlist {
+    background-color: rgb(220, 254, 254) !important;
+}
+
 .btn {
     color: rgb(254, 93, 35);
     padding: 8px 10px;
