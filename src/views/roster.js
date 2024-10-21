@@ -7,7 +7,7 @@ export default function () {
 
     rosterSection.innerHTML = `<h2>Roster</h2>
                 <div class="team-list">
-                    <table class="txt-xs" style="width: 100%;">
+                    <table class="txt-xs">
                         <thead>
                             <tr>
                                 <th scope="col">GP</th>
@@ -23,6 +23,41 @@ export default function () {
                                 <th scope="col">PTS</th>
                             </tr>
                         </thead>
+                    </table>
+                </div>
+                <h3>Team Totals</h3>
+                <div class="team-totals">
+                    <table class="txt-xs">
+                        <thead>
+                            <tr>
+                                <th scope="col">GP</th>
+                                <th scope="col">FG%</th>
+                                <th scope="col">FT%</th>
+                                <th scope="col">3PM</th>
+                                <th scope="col">REB</th>
+                                <th scope="col">AST</th>
+                                <th scope="col">A/TO</th>
+                                <th scope="col">STL</th>
+                                <th scope="col">BLK</th>
+                                <th scope="col">TO</th>
+                                <th scope="col">PTS</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>70</td>
+                                <td>.491</td>
+                                <td>.820</td>
+                                <td>2.1</td>
+                                <td>12.0</td>
+                                <td>4.4</td>
+                                <td>1.07</td>
+                                <td>1.8</td>
+                                <td>4.3</td>
+                                <td>4.1</td>
+                                <td>25.4</td>
+                            </tr>
+                        </tobdy>
                     </table>
                 </div>`;
 
@@ -58,6 +93,10 @@ export default function () {
         </table>`;
 
     teamList.appendChild(newCard);
+  };
+
+  const calculateStatAggregate = () => {
+    // TODO
   };
 
   return { initialise };

@@ -38,6 +38,10 @@ main {
     overflow-x: hidden;
 }
 
+.team-list {
+    min-height: 80%;
+}
+
 .table-actions {
     display: flex;
     flex-direction: row;
@@ -161,8 +165,11 @@ h2 {
     border-bottom: 1px solid rgb(220, 221, 223);
 }
 
-.player-card table {
+.team-list table, .player-card table, .team-totals table {
     width: 100%;
     text-align: center;
+}
+
+.player-card table {
     color: rgb(99, 100, 101);
 }

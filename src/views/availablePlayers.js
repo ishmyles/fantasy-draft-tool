@@ -86,7 +86,7 @@ export default function () {
   };
 
   const renderPlayers = () => {
-    const tableBody = document.querySelector("tbody");
+    const tableBody = document.querySelector("#available-players tbody");
     const availablePlayers = new DocumentFragment();
 
     data.forEach((player) => {
