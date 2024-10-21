@@ -4,16 +4,26 @@ import { default as availablePlayers } from "./views/availablePlayers.js";
 import { default as teamRoster } from "./views/roster.js";
 import { default as pickHistory } from "./views/pickHistory.js";
 
+import rosterHandler from "./utils/rosterHandler.js";
+import pickHistoryHandler from "./utils/pickHistoryHandler.js";
+
 const teamRosterSection = teamRoster();
-const pickHistorySection = pickHistory();
 const availablePlayersSection = availablePlayers();
+const pickHistorySection = pickHistory();
+
+const roster = rosterHandler();
+const picks = pickHistoryHandler();
 
 teamRosterSection.initialise();
+availablePlayersSection.initialise();
 pickHistorySection.initialise();
 
-availablePlayersSection.initialise();
-availablePlayersSection.renderPlayers();
+//localStorage.clear();
 
-// setTimeout(() => {
-//   availablePlayersSection.sortPlayers();
-// }, 5000);
+roster.initialise();
+picks.initialise();
+
+teamRosterSection.renderRoster();
+pickHistorySection.renderPickHistory();
+
+availablePlayersSection.renderPlayers();

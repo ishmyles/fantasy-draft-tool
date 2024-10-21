@@ -64,6 +64,11 @@ export default function () {
     pubsub.subscribe("DRAFT_PLAYER", addToRoster);
   };
 
+  const renderRoster = () => {
+    const list = new Set(JSON.parse(localStorage.getItem("fba-roster")));
+    list.forEach((id) => addToRoster(id));
+  };
+
   const addToRoster = (id) => {
     const teamList = document.querySelector(".team-list");
 
@@ -99,5 +104,5 @@ export default function () {
     // TODO
   };
 
-  return { initialise };
+  return { initialise, renderRoster };
 }

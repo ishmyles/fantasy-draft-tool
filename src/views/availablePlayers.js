@@ -86,13 +86,16 @@ export default function () {
   };
 
   const renderPlayers = () => {
+    const list = new Set(JSON.parse(localStorage.getItem("fba-picks")));
     const tableBody = document.querySelector("#available-players tbody");
     const availablePlayers = new DocumentFragment();
 
-    data.forEach((player) => {
-      const newRow = renderPlayerList(player);
-      availablePlayers.appendChild(newRow);
-    });
+    data
+      .filter((player) => !list.has(player.id))
+      .forEach((player) => {
+        const newRow = renderPlayerList(player);
+        availablePlayers.appendChild(newRow);
+      });
 
     document
       .querySelector("#available-players table")
@@ -153,6 +156,7 @@ export default function () {
   const sortPlayersByStats = (statCategory) => {
     const table = document.querySelector(".available-players-stats");
     const newtableBody = document.createElement("tbody");
+    const picks = new Set(JSON.parse(localStorage.getItem("fba-picks")));
 
     // Any stat that is not a TO will be descending order & only TO will be in ascending order
     const sortingFunction =
@@ -165,6 +169,7 @@ export default function () {
             Number(b.statsPrediction[statCategory]);
 
     data
+      .filter((player) => !picks.has(player.id))
       .filter((player) => player.statsPrediction.gp)
       .sort(sortingFunction)
       .forEach((player) => {
@@ -179,7 +184,10 @@ export default function () {
   const filterByPosition = (position) => {
     const table = document.querySelector(".available-players-stats");
     const newtableBody = document.createElement("tbody");
+    const picks = new Set(JSON.parse(localStorage.getItem("fba-picks")));
+
     data
+      .filter((player) => !picks.has(player.id))
       .filter((player) => {
         const playerPositions = player.position.split(",");
         if (position === "G") {
@@ -206,8 +214,10 @@ export default function () {
   const searchPlayer = (input) => {
     const table = document.querySelector(".available-players-stats");
     const newtableBody = document.createElement("tbody");
+    const picks = new Set(JSON.parse(localStorage.getItem("fba-picks")));
 
     data
+      .filter((player) => !picks.has(player.id))
       .filter((player) =>
         player.name.toLowerCase().includes(input.toLowerCase())
       )

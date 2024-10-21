@@ -10,6 +10,11 @@ export default function () {
     pubsub.subscribe("MARK_PLAYER_UNAVAILABLE", addToPickHistory);
   };
 
+  const renderPickHistory = () => {
+    const list = new Set(JSON.parse(localStorage.getItem("fba-picks")));
+    list.forEach((id) => addToPickHistory(id));
+  };
+
   const addToPickHistory = (id) => {
     const picksList = document.querySelector(".picks-list");
     const picks = document.querySelectorAll(".pick-history-card");
@@ -26,5 +31,5 @@ export default function () {
     picksList.appendChild(pickCard);
   };
 
-  return { initialise };
+  return { initialise, renderPickHistory };
 }
