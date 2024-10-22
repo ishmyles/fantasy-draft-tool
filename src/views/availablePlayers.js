@@ -6,26 +6,7 @@ export default function () {
     const playersSection = document.querySelector("#available-players");
     playersSection.innerHTML = `<div class="table-actions">
                       <h2>Players</h2>
-                      <div>
-                      <label for="stat-category">Sort by:
-                        <select id="stat-category">
-                            <option value="id">Rank</option>
-                            <option value="gp">GP</option>
-                            <option value="fg">FG%</option>
-                            <option value="ft">FT%</option>
-                            <option value="3pm">3PM</option>
-                            <option value="reb">REB</option>
-                            <option value="ast">AST</option>
-                            <option value="to">TO</option>
-                            <option value="assistTO">A/TO</option>
-                            <option value="stl">STL</option>
-                            <option value="blk">BLK</option>
-                            <option value="pts">PTS</option>
-                        </select>
-                      </label>
-                      </div>
-                      <div>
-                        <label for="position-category">Filter by:
+                        <label for="position-category">Positions:
                             <select id="position-category">
                                 <option value="ALL">All</option>
                                 <option value="PG">PG</option>
@@ -37,7 +18,6 @@ export default function () {
                                 <option value="F">F</option>
                             </select>
                         </label>
-                      </div>
                       <div class="search-bar">
                           <input type="text" id="search" placeholder="Search Player">
                           <button id="clear">Clear</button>
@@ -46,19 +26,19 @@ export default function () {
                   <table class="available-players-stats">
                       <thead>
                           <tr>
-                              <th scope="col">Rank</th>
+                              <th scope="col"><span class="btn-sort" data-stat="id">Rank</span></th>
                               <th scope="col"></th> <!--Player-->
-                              <th scope="col">GP</th>
-                              <th scope="col">FG%</th>
-                              <th scope="col">FT%</th>
-                              <th scope="col">3PM</th>
-                              <th scope="col">REB</th>
-                              <th scope="col">AST</th>
-                              <th scope="col">A/TO</th>
-                              <th scope="col">STL</th>
-                              <th scope="col">BLK</th>
-                              <th scope="col">TO</th>
-                              <th scope="col">PTS</th>
+                              <th scope="col"><span class="btn-sort" data-stat="gp">GP</span></th>
+                              <th scope="col"><span class="btn-sort" data-stat="fg">FG%</span></th>
+                              <th scope="col"><span class="btn-sort" data-stat="ft">FT%</span></th>
+                              <th scope="col"><span class="btn-sort" data-stat="3pm">3PM</span></th>
+                              <th scope="col"><span class="btn-sort" data-stat="reb">REB</span></th>
+                              <th scope="col"><span class="btn-sort" data-stat="ast">AST</span></th>
+                              <th scope="col"><span class="btn-sort" data-stat="assistTO">A/TO</span></th>
+                              <th scope="col"><span class="btn-sort" data-stat="stl">STL</span></th>
+                              <th scope="col"><span class="btn-sort" data-stat="blk">BLK</span></th>
+                              <th scope="col"><span class="btn-sort" data-stat="to">TO</span></th>
+                              <th scope="col"><span class="btn-sort" data-stat="pts">PTS</span></th>
                           </tr>
                       </thead>
                       <tbody>
@@ -85,6 +65,8 @@ export default function () {
           const id = tableRow.dataset.id;
           tableRow.remove();
           pubsub.publish("MARK_PLAYER_UNAVAILABLE", id);
+        } else if (e.target.nodeName === "SPAN") {
+          sortPlayersByStats(e.target.dataset.stat);
         }
       });
 
@@ -100,10 +82,10 @@ export default function () {
         e.target.classList.toggle("wishlist");
       });
 
-    const sortDropdown = document.querySelector("#stat-category");
-    sortDropdown.addEventListener("change", (e) =>
-      sortPlayersByStats(e.target.value)
-    );
+    // const sortDropdown = document.querySelector("#stat-category");
+    // sortDropdown.addEventListener("change", (e) =>
+    //   sortPlayersByStats(e.target.value)
+    // );
 
     const filterDropdown = document.querySelector("#position-category");
     filterDropdown.addEventListener("change", (e) =>

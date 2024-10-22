@@ -172,6 +172,10 @@ main {
     padding-left: 15px;
 }
 
+.btn-sort {
+    border-bottom: 2px solid black;
+}
+
 .search-bar {
     margin-right: 15px;
 }
