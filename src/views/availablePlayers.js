@@ -124,23 +124,27 @@ export default function () {
   };
 
   const renderPlayers = () => {
-    const list = new Set(JSON.parse(localStorage.getItem("fba-picks")));
-    const wishlist = new Set(JSON.parse(localStorage.getItem("fba-wishlist")));
-    const table = document.querySelector("#available-players table");
-    const tableBody = document.querySelector("#available-players tbody");
-    const newtableBody = document.createElement("tbody");
-    const availablePlayers = new DocumentFragment();
+    setTimeout(() => {
+      const list = new Set(JSON.parse(localStorage.getItem("fba-picks")));
+      const wishlist = new Set(
+        JSON.parse(localStorage.getItem("fba-wishlist"))
+      );
+      const table = document.querySelector("#available-players table");
+      const tableBody = document.querySelector("#available-players tbody");
+      const newtableBody = document.createElement("tbody");
+      const availablePlayers = new DocumentFragment();
 
-    data
-      .filter((player) => !list.has(player.id))
-      .forEach((player) => {
-        const newRow = renderPlayerList(player, wishlist);
-        availablePlayers.appendChild(newRow);
-      });
+      data
+        .filter((player) => !list.has(player.id))
+        .forEach((player) => {
+          const newRow = renderPlayerList(player, wishlist);
+          availablePlayers.appendChild(newRow);
+        });
 
-    newtableBody.appendChild(availablePlayers);
-    tableBody.remove();
-    table.appendChild(newtableBody);
+      newtableBody.appendChild(availablePlayers);
+      tableBody.remove();
+      table.appendChild(newtableBody);
+    }, 0);
   };
 
   const renderPlayerList = (player, wishlist) => {

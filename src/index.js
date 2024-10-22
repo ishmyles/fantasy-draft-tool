@@ -33,7 +33,6 @@ teamRosterSection.initialise();
 availablePlayersSection.initialise();
 pickHistorySection.initialise();
 
+availablePlayersSection.renderPlayers();
 teamRosterSection.renderRoster();
 pickHistorySection.renderPickHistory();
-
-availablePlayersSection.renderPlayers();
