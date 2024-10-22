@@ -11,6 +11,7 @@ export default function () {
                         <thead>
                             <tr>
                                 <th scope="col">GP</th>
+                                <th scope="col">FGM</th>
                                 <th scope="col">FG%</th>
                                 <th scope="col">FT%</th>
                                 <th scope="col">3PM</th>
@@ -31,6 +32,7 @@ export default function () {
                         <thead>
                             <tr>
                                 <th scope="col">GP</th>
+                                <th scope="col">FGM</th>
                                 <th scope="col">FG%</th>
                                 <th scope="col">FT%</th>
                                 <th scope="col">3PM</th>
@@ -46,6 +48,7 @@ export default function () {
                         <tbody>
                             <tr>
                                 <td data-stat="gp"></td>
+                                <td data-stat="fgm"></td>
                                 <td data-stat="fg"></td>
                                 <td data-stat="ft"></td>
                                 <td data-stat="3pm"></td>
@@ -79,6 +82,7 @@ export default function () {
                         <thead>
                             <tr>
                                 <th scope="col">GP</th>
+                                <th scope="col">FGM</th>
                                 <th scope="col">FG%</th>
                                 <th scope="col">FT%</th>
                                 <th scope="col">3PM</th>
@@ -113,6 +117,7 @@ export default function () {
         <table class="txt-xs">
         <tbody>
             <td>${data[index].statsPrediction.gp}</td>
+            <td>${data[index].statsPrediction.fgm}</td>
             <td>${data[index].statsPrediction.fg}</td>
             <td>${data[index].statsPrediction.ft}</td>
             <td>${data[index].statsPrediction["3pm"]}</td>
@@ -137,6 +142,7 @@ export default function () {
                         <thead>
                             <tr>
                                 <th scope="col">GP</th>
+                                <th scope="col">FGM</th>
                                 <th scope="col">FG%</th>
                                 <th scope="col">FT%</th>
                                 <th scope="col">3PM</th>
@@ -152,6 +158,7 @@ export default function () {
                         <tbody>
                             <tr>
                                 <td data-stat="gp"></td>
+                                <td data-stat="fgm"></td>
                                 <td data-stat="fg"></td>
                                 <td data-stat="ft"></td>
                                 <td data-stat="3pm"></td>
@@ -177,6 +184,7 @@ export default function () {
       const index = id - 1;
       roster.push({
         gp: data[index].statsPrediction.gp,
+        fgm: data[index].statsPrediction.fgm,
         fg: data[index].statsPrediction.fg,
         ft: data[index].statsPrediction.ft,
         "3pm": data[index].statsPrediction["3pm"],
@@ -192,6 +200,7 @@ export default function () {
 
     const initialAggr = {
       gp: 0,
+      fgm: 0,
       fg: 0,
       ft: 0,
       "3pm": 0,
@@ -206,6 +215,7 @@ export default function () {
 
     const aggrAvgStats = roster.reduce((aggr, current) => {
       aggr.gp += +current.gp;
+      aggr.fgm += +current.fgm;
       aggr.fg += +current.fg;
       aggr.ft += +current.ft;
       aggr["3pm"] += +current["3pm"];

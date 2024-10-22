@@ -29,6 +29,7 @@ export default function () {
                               <th scope="col"><span class="btn-sort" data-stat="id">Rank</span></th>
                               <th scope="col"></th> <!--Player-->
                               <th scope="col"><span class="btn-sort" data-stat="gp">GP</span></th>
+                              <th scope="col"><span class="btn-sort" data-stat="fgm">FGM</span></th>
                               <th scope="col"><span class="btn-sort" data-stat="fg">FG%</span></th>
                               <th scope="col"><span class="btn-sort" data-stat="ft">FT%</span></th>
                               <th scope="col"><span class="btn-sort" data-stat="3pm">3PM</span></th>
@@ -145,6 +146,7 @@ export default function () {
             </div>
           </td>
           <td>${player.statsPrediction.gp}</td>
+          <td>${player.statsPrediction.fgm}</td>
           <td>${player.statsPrediction.fg}</td>
           <td>${player.statsPrediction.ft}</td>
           <td>${player.statsPrediction["3pm"]}</td>
