@@ -73,19 +73,16 @@ export default function () {
     document
       .querySelector("#available-players table")
       .addEventListener("dblclick", (e) => {
-        const id = e.target.dataset.id;
-        if (e.target.classList.contains("wishlist")) {
-          pubsub.publish("REMOVE_WISHLIST", id);
-        } else {
-          pubsub.publish("ADD_WISHLIST", id);
+        if (e.target.nodeName === "TR") {
+          const id = e.target.dataset.id;
+          if (e.target.classList.contains("wishlist")) {
+            pubsub.publish("REMOVE_WISHLIST", id);
+          } else {
+            pubsub.publish("ADD_WISHLIST", id);
+          }
+          e.target.classList.toggle("wishlist");
         }
-        e.target.classList.toggle("wishlist");
       });
-
-    // const sortDropdown = document.querySelector("#stat-category");
-    // sortDropdown.addEventListener("change", (e) =>
-    //   sortPlayersByStats(e.target.value)
-    // );
 
     const filterDropdown = document.querySelector("#position-category");
     filterDropdown.addEventListener("change", (e) =>
